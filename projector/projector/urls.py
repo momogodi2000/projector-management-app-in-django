@@ -20,7 +20,11 @@ from projector_management import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    # ... other URL patterns for your app within projector_management
+    path('login/', views.login_view, name='login'),
+    path('register/', views.register, name='register'),
+    path('forgot-password/', views.forgot_password, name='forgot_password'),
+    path('user-dashboard/', views.user_dashboard, name='user_dashboard'),
+    path('admin-dashboard/', views.admin_dashboard, name='admin_dashboard'),
 ]
 
 
