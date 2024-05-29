@@ -1,13 +1,66 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <title>user Dashboard</title>
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Link to admin.css -->
+    <link rel="stylesheet" href="{% static 'admin.css' %}">
 </head>
+
 <body>
-    <h1>Welcome to the User Dashboard</h1>
+    <div class='dashboard'>
+        <div class="dashboard-nav">
+            <header>
+                <div class="notification-icon">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">1</span>
+                    <div class="notification-panel">
+                        <h3>Notifications</h3>
+                
+                    </div>
+                </div>
+                <a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a>
+                <a href="#" class="brand-logo"><i class="fas fa-anchor"></i> <span>Admin Panel</span></a>
+            </header>
+
+            <nav class="dashboard-nav-list">
+                <a href="#" class="dashboard-nav-item active"><i class="fas fa-home"></i> Home </a> 
+                <a href="#" class="dashboard-nav-item"><i class="fas fa-tachometer-alt"></i> Add projector</a>
+                <a href="#" class="dashboard-nav-item active"><i class="fas fa-home"></i> Stock </a>
+                <a href="{% url 'manage_users' %}" class="dashboard-nav-item"><i class="fas fa-tachometer-alt"></i> Manage Users</a>
+                <a href="#" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> About AICS </a>
+               
+                <div class='dashboard-nav-dropdown'>
+                </div>
+                
+               
+                <!-- Logout Form -->
+                <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+                </form>
+            </nav>
+        </div>
+        <div class='dashboard-app'>
+            <header class='dashboard-toolbar'>
+                <h1>Welcome admin</h1> <!-- Move the welcome message here -->
+                <a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a>
+            </header>
+            <div class='dashboard-content'>
+                <div class='container'>
+                    <div class='card'>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Link to Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
