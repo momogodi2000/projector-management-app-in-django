@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserForm
+from django.urls import reverse
 
 def home(request):
     context = {} 
@@ -48,7 +49,7 @@ def forgot_password(request):
 def user_dashboard(request):
     if request.user.is_superuser:
         return redirect('admin_dashboard')
-    return render(request, 'dashboard/user_dashboard.html')
+    return render(request, 'dashboard/user_dashboard.html', {'user': request.user})
 
 @login_required
 def admin_dashboard(request):
