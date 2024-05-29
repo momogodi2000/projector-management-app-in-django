@@ -1,16 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .forms import UserForm
 
 def home(request):
     context = {} 
     return render(request, 'index.html', context)
 
-
-def index(request):
-    return render(request, 'index.html')
 
 def login_view(request):
     if request.method == 'POST':
@@ -56,5 +54,52 @@ def user_dashboard(request):
 def admin_dashboard(request):
     if not request.user.is_superuser:
         return redirect('user_dashboard')
-    return render(request, 'dashboard/admin_dashboard.html')
+    users = User.objects.all()
+    return render(request, 'dashboard/admin_dashboard.html', {'users': users})
 
+@login_required
+def add_user(request):
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'User added successfully')
+            return redirect('admin_dashboard')
+    else:
+        form = UserForm()
+    return render(request, 'dashboard/crud/add_user.html', {'form': form})
+
+@login_required
+def edit_user(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    if request.method == 'POST':
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'User updated successfully')
+            return redirect('admin_dashboard')
+    else:
+        form = UserForm(instance=user)
+    return render(request, 'dashboard/crud/edit_user.html', {'form': form})
+
+@login_required
+def delete_user(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    if request.method == 'POST':
+        user.delete()
+        messages.success(request, 'User deleted successfully')
+        return redirect('admin_dashboard')
+    return render(request, 'dashboard/crud/delete_user.html', {'user': user})
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+@login_required
+def manage_users(request):
+    if not request.user.is_superuser:
+        return redirect('user_dashboard')
+
+    users = User.objects.all()
+    return render(request, 'dashboard/admin_dashboard.html', {'users': users})
