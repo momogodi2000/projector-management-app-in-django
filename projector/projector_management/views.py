@@ -5,6 +5,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserForm
 from django.urls import reverse
+from .models import Projector
+from .forms import ProjectorForm
+
 
 def home(request):
     context = {} 
@@ -104,3 +107,37 @@ def manage_users(request):
 
     users = User.objects.all()
     return render(request, 'dashboard/admin_dashboard.html', {'users': users})
+
+
+    
+    def manage_projectors(request):
+        projectors = Projector.objects.all()
+    return render(request, 'dashboard/crud_projector/manage_projectors.html', {'projectors': projectors})
+
+def add_projector(request):
+    if request.method == 'POST':
+        form = ProjectorForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_projectors')
+    else:
+        form = ProjectorForm()
+    return render(request, 'dashboard/crud_projector/add_projector.html', {'form': form})
+
+def edit_projector(request, pk):
+    projector = get_object_or_404(Projector, pk=pk)
+    if request.method == 'POST':
+        form = ProjectorForm(request.POST, request.FILES, instance=projector)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_projectors')
+    else:
+        form = ProjectorForm(instance=projector)
+    return render(request, 'dashboard/crud_projector/edit_projector.html', {'form': form})
+
+def delete_projector(request, pk):
+    projector = get_object_or_404(Projector, pk=pk)
+    if request.method == 'POST':
+        projector.delete()
+        return redirect('manage_projectors')
+    return render(request, 'dashboard/crud_projector/delete_projector.html', {'projector': projector})

@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 class Projector(models.Model):
     model_type = models.CharField(max_length=255)
     park_type = models.CharField(max_length=255)
-    serial_number = models.CharField(max_length=255, unique=True)  # Track specific projectors
+    serial_number = models.CharField(max_length=255, unique=True)  
+    image = models.ImageField(upload_to='projector_images/', null=True, blank=True) # Track specific projectors
 
 class Device(models.Model):
     name = models.CharField(max_length=255)
