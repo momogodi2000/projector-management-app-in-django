@@ -1,8 +1,8 @@
-from django.contrib import admin
+from django.urls import path
+from django.conf import settings
 from django.conf.urls.static import static
-from projector_management import views
+from . import views
 from .views import manage_projectors, add_projector, edit_projector, delete_projector
-
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -20,6 +20,4 @@ urlpatterns = [
     path('add_projector/', add_projector, name='add_projector'),
     path('edit_projector/<int:pk>/', edit_projector, name='edit_projector'),
     path('delete_projector/<int:pk>/', delete_projector, name='delete_projector'),
-
-    
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -15,15 +15,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, include
-from projector_management import views
-from django.conf.urls.static import static
-
 
 urlpatterns = [
-    path('projector/', include('projector.urls')),
-    path('', views.home, name='home'),
-
-
+    path('', include('projector_management.urls')),  # Main index URL and include projector_management URLs
+    path('projector/', include('projector_management.urls')),  # Include projector_management URLs
 ]
+
 
 
