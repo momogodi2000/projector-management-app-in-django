@@ -110,8 +110,9 @@ def manage_users(request):
 
 
     
-    def manage_projectors(request):
-        projectors = Projector.objects.all()
+
+def manage_projectors(request):
+    projectors = Projector.objects.all()
     return render(request, 'dashboard/crud_projector/manage_projectors.html', {'projectors': projectors})
 
 def add_projector(request):

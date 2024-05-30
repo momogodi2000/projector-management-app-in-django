@@ -20,8 +20,9 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('projectors/', include('projectors.urls')),
-    path('dashboard/', include('dashboard.urls')),
+    path('projector/', include('projector.urls')),
+    path('', views.home, name='home'),
+
 
 ]
 
