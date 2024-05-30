@@ -1,0 +1,13 @@
+/* Custom styles for the manage users page */
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.table {
+    margin-top: 20px;
+}
+
+.btn {
+    margin-right: 5px;
+}

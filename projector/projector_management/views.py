@@ -7,6 +7,9 @@ from .forms import UserForm
 from django.urls import reverse
 from .models import Projector
 from .forms import ProjectorForm
+from django.contrib.auth import logout
+from django.contrib import messages
+
 
 
 def home(request):
@@ -61,53 +64,47 @@ def admin_dashboard(request):
     users = User.objects.all()
     return render(request, 'dashboard/admin_dashboard.html', {'users': users})
 
-@login_required
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, "You have successfully logged out.")
+    return redirect('login')
+
+
+def manage_users(request):
+    users = User.objects.all()
+    return render(request, 'dashboard/crud_user/manage_users.html', {'users': users})
+
 def add_user(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'User added successfully')
-            return redirect('admin_dashboard')
+            messages.success(request, 'User added successfully!')
+            return redirect('manage_users')
     else:
         form = UserForm()
-    return render(request, 'dashboard/crud/add_user.html', {'form': form})
+    return render(request, 'dashboard/crud_user/add_user.html', {'form': form})
 
-@login_required
 def edit_user(request, user_id):
-    user = get_object_or_404(User, pk=user_id)
+    user = get_object_or_404(User, id=user_id)
     if request.method == 'POST':
         form = UserForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
-            messages.success(request, 'User updated successfully')
-            return redirect('admin_dashboard')
+            messages.success(request, 'User updated successfully!')
+            return redirect('manage_users')
     else:
         form = UserForm(instance=user)
-    return render(request, 'dashboard/crud/edit_user.html', {'form': form})
+    return render(request, 'dashboard/crud_user/edit_user.html', {'form': form, 'user': user})
 
-@login_required
 def delete_user(request, user_id):
-    user = get_object_or_404(User, pk=user_id)
+    user = get_object_or_404(User, id=user_id)
     if request.method == 'POST':
         user.delete()
-        messages.success(request, 'User deleted successfully')
-        return redirect('admin_dashboard')
-    return render(request, 'dashboard/crud/delete_user.html', {'user': user})
-
-@login_required
-def logout_view(request):
-    logout(request)
-    return redirect('login')
-
-@login_required
-def manage_users(request):
-    if not request.user.is_superuser:
-        return redirect('user_dashboard')
-
-    users = User.objects.all()
-    return render(request, 'dashboard/admin_dashboard.html', {'users': users})
-
+        messages.success(request, 'User deleted successfully!')
+        return redirect('manage_users')
+    return render(request, 'dashboard/crud_user/delete_user.html', {'user': user})
 
     
 
