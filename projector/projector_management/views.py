@@ -10,6 +10,7 @@ from .forms import ProjectorForm
 from django.contrib.auth import logout
 from django.contrib import messages
 from .models import Withdrawal, Deposit
+from .decorators import admin_required
 
 
 
@@ -67,16 +68,12 @@ def admin_dashboard(request):
     return render(request, 'dashboard/admin_dashboard.html', {'users': users})
 
 
-def logout_view(request):
-    logout(request)
-    messages.success(request, "You have successfully logged out.")
-    return redirect('login')
-
-
+@admin_required
 def manage_users(request):
     users = User.objects.all()
     return render(request, 'dashboard/crud_user/manage_users.html', {'users': users})
 
+@admin_required
 def add_user(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
@@ -88,7 +85,7 @@ def add_user(request):
         form = UserForm()
     return render(request, 'dashboard/crud_user/add_user.html', {'form': form})
 
-
+@admin_required
 def edit_user(request, user_id):
     user = get_object_or_404(User, id=user_id)
     if request.method == 'POST':
@@ -101,6 +98,7 @@ def edit_user(request, user_id):
         form = UserForm(instance=user)
     return render(request, 'dashboard/crud_user/edit_user.html', {'form': form, 'user': user})
 
+@admin_required
 def delete_user(request, user_id):
     user = get_object_or_404(User, id=user_id)
     if request.method == 'POST':
@@ -109,11 +107,12 @@ def delete_user(request, user_id):
         return redirect('manage_users')
     return render(request, 'dashboard/crud_user/delete_user.html', {'user': user})
 
-    
+@admin_required
 def manage_projectors(request):
     projectors = Projector.objects.all()
     return render(request, 'dashboard/crud_projector/manage_projectors.html', {'projectors': projectors})
 
+@admin_required
 def add_projector(request):
     if request.method == 'POST':
         form = ProjectorForm(request.POST, request.FILES)
@@ -124,6 +123,7 @@ def add_projector(request):
         form = ProjectorForm()
     return render(request, 'dashboard/crud_projector/add_projector.html', {'form': form})
 
+@admin_required
 def edit_projector(request, pk):
     projector = get_object_or_404(Projector, pk=pk)
     if request.method == 'POST':
@@ -135,12 +135,22 @@ def edit_projector(request, pk):
         form = ProjectorForm(instance=projector)
     return render(request, 'dashboard/crud_projector/edit_projector.html', {'form': form})
 
+@admin_required
 def delete_projector(request, pk):
     projector = get_object_or_404(Projector, pk=pk)
     if request.method == 'POST':
         projector.delete()
         return redirect('manage_projectors')
     return render(request, 'dashboard/crud_projector/delete_projector.html', {'projector': projector})
+
+@login_required
+def logout_view(request):
+    logout(request)
+    messages.success(request, 'You have been logged out successfully!')
+    return redirect('login')
+
+
+    
 
 
 def admin_required(view_func):
