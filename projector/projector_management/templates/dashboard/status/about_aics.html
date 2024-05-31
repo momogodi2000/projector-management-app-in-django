@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About AICS</title>
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Link to custom CSS -->
+    <link rel="stylesheet" href="{% static 'admin.css' %}">
+</head>
+
+<body>
+    <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary mt-3">Return dashboard</a>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">About IAI Cameroon</h1>
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Public University</h2>
+                <p class="card-text">IAI Cameroon (Institut Africain d'Informatique, Cameroon) is a public university located in Yaoundé, Cameroon. It is also known as the Centre d'Excellence Technologique Paul Biya. The university has positive reviews with a 4.10 rating on Google based on 208 reviews (as of today, May 31, 2024).</p>
+                <h2 class="card-title">Focus on Technology</h2>
+                <p class="card-text">IAI Cameroon offers programs in various information technology fields, including Telecommunications and Networks, Cybersecurity, and Management of Information Systems. They also have a UNESCO Chair in Social Sciences and Educational Engineering applied to Digital Technologies.</p>
+                <h2 class="card-title">Open Today</h2>
+                <p class="card-text">Their hours today (Friday, May 31, 2024) are 8:00 am to 4:00 pm.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link to Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Link to custom JS -->
+    <script src="{% static 'admin.js' %}"></script>
+</body>
+
+</html>

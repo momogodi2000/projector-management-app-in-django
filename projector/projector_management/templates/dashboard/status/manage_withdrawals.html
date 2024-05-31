@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Withdrawals</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'status.css' %}">
+</head>
+<body>
+    <br>
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary mt-3">Return dashboard</a>
+    <div class='dashboard'>
+        <div class="container mt-5">
+            <h2>Manage Withdrawals</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>User</th>
+                        <th>Projector</th>
+                        <th>Start Time</th>
+                        <th>Devices</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for withdrawal in withdrawals %}
+                    <tr>
+                        <td>{{ withdrawal.id }}</td>
+                        <td>{{ withdrawal.user.username }}</td>
+                        <td>{{ withdrawal.projector.name }}</td>
+                        <td>{{ withdrawal.start_time }}</td>
+                        <td>
+                            {% for device in withdrawal.devices.all %}
+                                {{ device.name }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'status.js' %}"></script>
+</body>
+</html>

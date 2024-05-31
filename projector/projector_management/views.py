@@ -2,13 +2,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import UserForm
 from django.urls import reverse
 from .models import Projector
 from .forms import ProjectorForm
 from django.contrib.auth import logout
 from django.contrib import messages
+from .models import Withdrawal, Deposit
+
 
 
 
@@ -86,6 +88,7 @@ def add_user(request):
         form = UserForm()
     return render(request, 'dashboard/crud_user/add_user.html', {'form': form})
 
+
 def edit_user(request, user_id):
     user = get_object_or_404(User, id=user_id)
     if request.method == 'POST':
@@ -107,7 +110,6 @@ def delete_user(request, user_id):
     return render(request, 'dashboard/crud_user/delete_user.html', {'user': user})
 
     
-
 def manage_projectors(request):
     projectors = Projector.objects.all()
     return render(request, 'dashboard/crud_projector/manage_projectors.html', {'projectors': projectors})
@@ -139,3 +141,21 @@ def delete_projector(request, pk):
         projector.delete()
         return redirect('manage_projectors')
     return render(request, 'dashboard/crud_projector/delete_projector.html', {'projector': projector})
+
+
+def admin_required(view_func):
+    decorated_view_func = login_required(user_passes_test(lambda user: user.is_superuser)(view_func))
+    return decorated_view_func
+
+@admin_required
+def manage_withdrawals(request):
+    withdrawals = Withdrawal.objects.all()
+    return render(request, 'dashboard/status/manage_withdrawals.html', {'withdrawals': withdrawals})
+
+@admin_required
+def manage_deposits(request):
+    deposits = Deposit.objects.all()
+    return render(request, 'dashboard/status/manage_deposits.html', {'deposits': deposits})
+
+def about_aics(request):
+    return render(request, 'dashboard/status/about_aics.html')

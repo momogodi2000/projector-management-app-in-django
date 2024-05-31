@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Deposits</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'status.css' %}">
+</head>
+<body>
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary mt-3">Return dashboard</a>
+    <div class='dashboard'>
+        <div class="container mt-5">
+            <h2>Manage Deposits</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Withdrawal ID</th>
+                        <th>End Time</th>
+                        <th>Returned Devices</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for deposit in deposits %}
+                    <tr>
+                        <td>{{ deposit.id }}</td>
+                        <td>{{ deposit.withdrawal.id }}</td>
+                        <td>{{ deposit.end_time }}</td>
+                        <td>
+                            {% for device in deposit.returned_devices.all %}
+                                {{ device.name }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'status.js' %}"></script>
+</body>
+</html>

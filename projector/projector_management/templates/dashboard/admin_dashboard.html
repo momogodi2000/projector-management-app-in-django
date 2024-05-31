@@ -31,8 +31,9 @@
             <nav class="dashboard-nav-list">
                 <a href="{% url 'manage_projectors' %}" class="dashboard-nav-item"><i class="fas fa-tachometer-alt"></i> Manage projector</a>
                 <a href="{% url 'manage_users' %}" class="dashboard-nav-item"><i class="fas fa-tachometer-alt"></i> Manage Users</a>
-                <a href="#" class="dashboard-nav-item active"><i class="fas fa-home"></i> Stastistic</a>
-                <a href="#" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> About AICS </a>
+                <a href="{% url 'manage_withdrawals' %}" class="dashboard-nav-item"><i class="fas fa-home"></i> Withdraw Projector</a>
+                <a href="{% url 'manage_deposits' %}" class="dashboard-nav-item"><i class="fas fa-home"></i> Deposit Projector</a>
+                <a href="{% url 'about_aics' %}" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> About AICS</a>
                
                 <div class='dashboard-nav-dropdown'>
                 </div>
