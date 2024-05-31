@@ -22,13 +22,13 @@
                     </div>
                 </div>
                 <a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a>
-                <a href="#" class="brand-logo"><i class="fas fa-anchor"></i> <span>Admin Panel</span></a>
+                <a href="#" class="brand-logo"><i class="fas fa-anchor"></i> <span>User Panel</span></a>
             </header>
             <nav class="dashboard-nav-list"> 
-                <a href="#" class="dashboard-nav-item"><i class="fas fa-tachometer-alt"></i> Book for a projector</a>
+                <a href="{% url 'book_projector' %}" class="dashboard-nav-item"><i class="fas fa-tachometer-alt"></i> Book for a projector</a>
                 <a href="#" class="dashboard-nav-item active"><i class="fas fa-home"></i> History of booking</a>
-                <a href="#" class="dashboard-nav-item"><i class="fas fa-tachometer-alt"></i> ##</a>
-                <a href="#" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> About AICS </a>
+                <a href="#" class="dashboard-nav-item"><i class="fas fa-tachometer-alt"></i> Consulte Projector</a>
+                <a href="{% url 'about_aics' %}" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> About AICS </a>
                 <div class='dashboard-nav-dropdown'></div>
                 <!-- Logout Form -->
                 <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>

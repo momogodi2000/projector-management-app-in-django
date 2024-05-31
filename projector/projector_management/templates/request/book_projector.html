@@ -4,17 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Validate Booking</title>
+    <title>Book a Projector</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'admin.css' %}">
 </head>
 <body>
+    <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary mt-3">Return dashboard</a>
     <div class="container mt-5">
-        <h1>Validate Booking</h1>
+        <h1>Book a Projector</h1>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Book</button>
         </form>
     </div>
 </body>

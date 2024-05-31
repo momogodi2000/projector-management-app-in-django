@@ -66,6 +66,11 @@ def admin_dashboard(request):
     if not request.user.is_superuser:
         return redirect('user_dashboard')
     users = User.objects.all()
+
+    notifications = AdminNotification.objects.filter(notification_type='booking', is_seen=False)
+    context = {
+        'notifications': notifications}
+
     return render(request, 'dashboard/admin_dashboard.html', {'users': users})
 
 
@@ -173,37 +178,35 @@ def about_aics(request):
 
 
 @login_required
+def book_projector(request):
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            booking = form.save(commit=False)
+            booking.user = request.user
+            booking.status = 'Pending'
+            booking.save()
+            # Create notification for admin
+            AdminNotification.objects.create(
+                user=request.user,
+                projector=booking.projector,
+                booking=booking,
+                notification_type='booking'
+            )
+            return redirect('user_dashboard')
+    else:
+        form = BookingForm()
+    return render(request, 'request/book_projector.html', {'form': form})
+
+@login_required
 def validate_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
     if request.method == 'POST':
-        form = ValidateBookingForm(request.POST, instance=booking)
-        if form.is_valid():
-            updated_booking = form.save(commit=False)
-            if updated_booking.status == 'Approved':
-                if booking.projector.quantity > 0:
-                    booking.projector.quantity -= 1
-                    booking.projector.save()
-                    updated_booking.save()
-                    AdminNotification.objects.create(
-                        user=booking.user,
-                        projector=booking.projector,
-                        booking=booking,
-                        notification_type='approval'
-                    )
-                    messages.success(request, 'Booking approved.')
-                else:
-                    messages.error(request, 'Not enough projectors in stock.')
-                    return redirect('validate_booking', booking_id=booking.id)
-            elif updated_booking.status == 'Rejected':
-                updated_booking.save()
-                AdminNotification.objects.create(
-                    user=booking.user,
-                    projector=booking.projector,
-                    booking=booking,
-                    notification_type='rejection'
-                )
-                messages.success(request, 'Booking rejected.')
-            return redirect('admin_dashboard')
-    else:
-        form = ValidateBookingForm(instance=booking)
-    return render(request, 'dashboard/book/validate_booking.html', {'form': form, 'booking': booking})
+        action = request.POST.get('action')
+        if action == 'approve':
+            booking.status = 'Approved'
+        elif action == 'reject':
+            booking.status = 'Rejected'
+        booking.save()
+        return redirect('admin_dashboard')
+    return render(request, 'request/validate_booking.html', {'booking': booking})

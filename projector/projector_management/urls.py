@@ -4,7 +4,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 from .views import manage_projectors, add_projector, edit_projector, delete_projector
-from .views import manage_withdrawals, manage_deposits, validate_booking
+from .views import manage_withdrawals, manage_deposits
+from .views import book_projector, validate_booking
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -29,5 +30,6 @@ urlpatterns = [
     path('manage_deposits/', manage_deposits, name='manage_deposits'),
     path('about_aics/', views.about_aics, name='about_aics'),
 
+    path('book_projector/', book_projector, name='book_projector'),
     path('validate_booking/<int:booking_id>/', validate_booking, name='validate_booking'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

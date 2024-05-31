@@ -22,7 +22,7 @@
                                 <li>
                                     {{ notification.notification_type }}: {{ notification.created_at }}
                                     {% if notification.notification_type == 'booking' %}
-                                        <a href="{% url 'validate_booking' notification.booking.id %}" class="btn btn-primary btn-sm">Review</a>
+                                        <a href="{% url 'validate_booking' notification.booking.id %}" class="btn btn-primary btn-sm">Notifications</a>
                                     {% endif %}
                                 </li>
                             {% endfor %}
@@ -39,6 +39,8 @@
                 <a href="{% url 'manage_users' %}" class="dashboard-nav-item"><i class="fas fa-tachometer-alt"></i> Manage Users</a>
                 <a href="{% url 'manage_withdrawals' %}" class="dashboard-nav-item"><i class="fas fa-home"></i> Withdraw Projector</a>
                 <a href="{% url 'manage_deposits' %}" class="dashboard-nav-item"><i class="fas fa-home"></i> Deposit Projector</a>
+                <a href="#" class="dashboard-nav-item"><i class="fas fa-home"></i> Notifications</a>
+                
                 <a href="{% url 'about_aics' %}" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> About AICS</a>
                
                 <div class='dashboard-nav-dropdown'>

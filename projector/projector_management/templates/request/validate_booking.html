@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validate Booking</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Validate Booking</h1>
+        <p>Booking Details:</p>
+        <p>User: {{ booking.user.username }}</p>
+        <p>Projector: {{ booking.projector.name }}</p>
+        <p>Booking Date: {{ booking.booking_date }}</p>
+        <p>Start Time: {{ booking.start_time }}</p>
+        <p>End Time: {{ booking.end_time }}</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" name="action" value="approve" class="btn btn-success">Approve</button>
+            <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
+        </form>
+    </div>
+</body>
+</html>
