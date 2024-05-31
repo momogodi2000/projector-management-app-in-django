@@ -1,31 +1,37 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <!-- Link to Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Link to admin.css -->
     <link rel="stylesheet" href="{% static 'admin.css' %}">
 </head>
-
 <body>
     <div class='dashboard'>
         <div class="dashboard-nav">
             <header>
                 <div class="notification-icon">
                     <i class="fas fa-bell"></i>
-                    <span class="badge">1</span>
+                    <span class="badge">{{ notifications.count }}</span>
                     <div class="notification-panel">
                         <h3>Notifications</h3>
-                
+                        <ul>
+                            {% for notification in notifications %}
+                                <li>
+                                    {{ notification.notification_type }}: {{ notification.created_at }}
+                                    {% if notification.notification_type == 'booking' %}
+                                        <a href="{% url 'validate_booking' notification.booking.id %}" class="btn btn-primary btn-sm">Review</a>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
+
                 <a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a>
-                <a href="#" class="brand-logo"><i class="fas fa-anchor"></i> <span>Admin Panel</span></a>
+                <a href="" class="brand-logo"><i class="fas fa-anchor"></i> <span>Admin Panel</span></a>
             </header>
 
             <nav class="dashboard-nav-list">

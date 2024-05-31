@@ -1,3 +1,4 @@
+##@ author momo yvan
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -5,8 +6,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import UserForm
 from django.urls import reverse
-from .models import Projector
-from .forms import ProjectorForm
+from .models import Projector, Booking, AdminNotification
+from .forms import ProjectorForm,BookingForm, ValidateBookingForm
 from django.contrib.auth import logout
 from django.contrib import messages
 from .models import Withdrawal, Deposit
@@ -150,7 +151,7 @@ def logout_view(request):
     return redirect('login')
 
 
-    
+
 
 
 def admin_required(view_func):
@@ -169,3 +170,40 @@ def manage_deposits(request):
 
 def about_aics(request):
     return render(request, 'dashboard/status/about_aics.html')
+
+
+@login_required
+def validate_booking(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    if request.method == 'POST':
+        form = ValidateBookingForm(request.POST, instance=booking)
+        if form.is_valid():
+            updated_booking = form.save(commit=False)
+            if updated_booking.status == 'Approved':
+                if booking.projector.quantity > 0:
+                    booking.projector.quantity -= 1
+                    booking.projector.save()
+                    updated_booking.save()
+                    AdminNotification.objects.create(
+                        user=booking.user,
+                        projector=booking.projector,
+                        booking=booking,
+                        notification_type='approval'
+                    )
+                    messages.success(request, 'Booking approved.')
+                else:
+                    messages.error(request, 'Not enough projectors in stock.')
+                    return redirect('validate_booking', booking_id=booking.id)
+            elif updated_booking.status == 'Rejected':
+                updated_booking.save()
+                AdminNotification.objects.create(
+                    user=booking.user,
+                    projector=booking.projector,
+                    booking=booking,
+                    notification_type='rejection'
+                )
+                messages.success(request, 'Booking rejected.')
+            return redirect('admin_dashboard')
+    else:
+        form = ValidateBookingForm(instance=booking)
+    return render(request, 'dashboard/book/validate_booking.html', {'form': form, 'booking': booking})

@@ -1,9 +1,10 @@
+##@ author momo yvan
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 from .views import manage_projectors, add_projector, edit_projector, delete_projector
-from .views import manage_withdrawals, manage_deposits
+from .views import manage_withdrawals, manage_deposits, validate_booking
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -27,4 +28,6 @@ urlpatterns = [
     path('manage_withdrawals/', manage_withdrawals, name='manage_withdrawals'),
     path('manage_deposits/', manage_deposits, name='manage_deposits'),
     path('about_aics/', views.about_aics, name='about_aics'),
+
+    path('validate_booking/<int:booking_id>/', validate_booking, name='validate_booking'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
