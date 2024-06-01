@@ -61,17 +61,7 @@ def user_dashboard(request):
         return redirect('admin_dashboard')
     return render(request, 'dashboard/user_dashboard.html', {'user': request.user})
 
-@login_required
-def admin_dashboard(request):
-    if not request.user.is_superuser:
-        return redirect('user_dashboard')
-    users = User.objects.all()
 
-    notifications = AdminNotification.objects.filter(notification_type='booking', is_seen=False)
-    context = {
-        'notifications': notifications}
-
-    return render(request, 'dashboard/admin_dashboard.html', {'users': users})
 
 
 @admin_required
@@ -210,3 +200,17 @@ def validate_booking(request, booking_id):
         booking.save()
         return redirect('admin_dashboard')
     return render(request, 'request/validate_booking.html', {'booking': booking})
+
+@login_required
+def admin_dashboard(request):
+    if not request.user.is_superuser:
+        return redirect('user_dashboard')
+    users = User.objects.all()
+    notifications = AdminNotification.objects.filter(notification_type='booking', is_seen=False)
+    context = {
+        'notifications': notifications,
+        'users': users
+    }
+    return render(request, 'dashboard/admin_dashboard.html', context)
+
+

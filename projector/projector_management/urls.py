@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from . import views
 from .views import manage_projectors, add_projector, edit_projector, delete_projector
 from .views import manage_withdrawals, manage_deposits
-from .views import book_projector, validate_booking
+from .views import book_projector, validate_booking, admin_dashboard
 
 urlpatterns = [
     path('', views.home, name='home'),
