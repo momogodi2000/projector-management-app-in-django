@@ -2,6 +2,8 @@
  projector management app in django
 
  run the requirement.txt to have the dependency
+ run python manage.py test to see the different test
+
 
  work progression
  # MOMO godi yvan is the group header and work on the authentification/session and admin dashbaord aith test endpoint with postman.
