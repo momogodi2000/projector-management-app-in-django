@@ -176,6 +176,7 @@ def book_projector(request):
             booking.user = request.user
             booking.status = 'Pending'
             booking.save()
+            
             # Create notification for admin
             AdminNotification.objects.create(
                 user=request.user,
@@ -186,7 +187,13 @@ def book_projector(request):
             return redirect('user_dashboard')
     else:
         form = BookingForm()
-    return render(request, 'request/book_projector.html', {'form': form})
+    
+    projectors = Projector.objects.all()
+    context = {
+        'form': form,
+        'projectors': projectors
+    }
+    return render(request, 'request/book_projector.html', context)
 
 @login_required
 def validate_booking(request, booking_id):
