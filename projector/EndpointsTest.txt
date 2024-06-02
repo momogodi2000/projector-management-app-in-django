@@ -1,0 +1,46 @@
+StartFragment
+Device Endpoints:
+GET /api/devices/
+POST /api/devices/
+GET /api/devices/{id}/
+PUT /api/devices/{id}/
+DELETE /api/devices/{id}/
+
+Projector Endpoints:
+GET /api/projectors/
+POST /api/projectors/
+GET /api/projectors/{id}/
+PUT /api/projectors/{id}/
+DELETE /api/projectors/{id}/
+
+Withdrawal Endpoints:
+GET /api/withdrawals/
+POST /api/withdrawals/
+GET /api/withdrawals/{id}/
+PUT /api/withdrawals/{id}/
+DELETE /api/withdrawals/{id}/
+
+Deposit Endpoints:
+GET /api/deposits/
+POST /api/deposits/
+GET /api/deposits/{id}/
+PUT /api/deposits/{id}/
+DELETE /api/deposits/{id}/
+
+Booking Endpoints:
+GET /api/bookings/
+POST /api/bookings/
+GET /api/bookings/{id}/
+PUT /api/bookings/{id}/
+DELETE /api/bookings/{id}/
+
+AdminNotification Endpoints:
+GET /api/admin-notifications/
+POST /api/admin-notifications/
+GET /api/admin-notifications/{id}/
+PUT /api/admin-notifications/{id}/
+DELETE /api/admin-notifications/{id}/
+
+
+EndFragment
+

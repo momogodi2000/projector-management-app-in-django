@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking History</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'booking_history.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Booking History</h1>
+        <p>Total Bookings: {{ booking_count }}</p>
+
+        <table class="booking-table">
+            <thead>
+                <tr>
+                    <th>Projector</th>
+                    <th>Booking Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.projector }}</td>
+                    <td>{{ booking.booking_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{% url 'user_dashboard' %}" class="back-button">Back to Dashboard</a>
+    </div>
+</body>
+</html>

@@ -176,6 +176,7 @@ def book_projector(request):
             booking.user = request.user
             booking.status = 'Pending'
             booking.save()
+            
             # Create notification for admin
             AdminNotification.objects.create(
                 user=request.user,
@@ -186,7 +187,13 @@ def book_projector(request):
             return redirect('user_dashboard')
     else:
         form = BookingForm()
-    return render(request, 'request/book_projector.html', {'form': form})
+    
+    projectors = Projector.objects.all()
+    context = {
+        'form': form,
+        'projectors': projectors
+    }
+    return render(request, 'request/book_projector.html', context)
 
 @login_required
 def validate_booking(request, booking_id):
@@ -213,4 +220,17 @@ def admin_dashboard(request):
     }
     return render(request, 'dashboard/admin_dashboard.html', context)
 
+
+@login_required
+def booking_history(request):
+    bookings = Booking.objects.filter(user=request.user)
+    booking_count = bookings.count()
+    return render(request, 'request/booking_history.html', {'bookings': bookings, 'booking_count': booking_count})
+
+
+@login_required
+def available_projectors(request):
+    booked_projectors = Booking.objects.values_list('projector_id', flat=True)
+    projectors = Projector.objects.exclude(id__in=booked_projectors)
+    return render(request, 'request/available_projectors.html', {'projectors': projectors})
 

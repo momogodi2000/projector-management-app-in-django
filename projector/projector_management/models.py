@@ -43,6 +43,7 @@ class Booking(models.Model):
         ('Approved', 'Approved'),
         ('Rejected', 'Rejected'),
     ]
+    is_booked = models.BooleanField(default=False)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     projector = models.ForeignKey(Projector, on_delete=models.CASCADE)
