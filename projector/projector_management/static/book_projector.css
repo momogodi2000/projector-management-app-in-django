@@ -10,6 +10,7 @@ body {
     background-color: #ffffff;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 h1 {
@@ -46,5 +47,26 @@ select {
     text-align: center;
     border: none;
     border-radius: 3px;
+    margin-bottom: 10px; 
     cursor: pointer;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+    font-size: 12px;
+}
+
+.back-button::before {
+    content: "\2190"; 
+    margin-right: 5px;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
 }

@@ -1,4 +1,3 @@
-<!-- templates/request/book_projector.html -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +9,7 @@
 </head>
 <body>
     <div class="container mt-5">
+        
         <h1>Book a Projector</h1>
         <form method="post">
             {% csrf_token %}
@@ -34,6 +34,7 @@
                 <input type="time" id="end-time" name="end_time" required>
             </div>
             <button type="submit" class="btn btn-primary">Book</button>
+            <a href="{% url 'user_dashboard' %}" class="back-button">Back to Dashboard</a>
         </form>
     </div>
 </body>

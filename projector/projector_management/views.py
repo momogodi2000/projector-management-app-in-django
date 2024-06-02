@@ -214,3 +214,12 @@ def admin_dashboard(request):
     return render(request, 'dashboard/admin_dashboard.html', context)
 
 
+@login_required
+def booking_history(request):
+    # Fetch booking data from the database for the current user
+    bookings = Booking.objects.filter(user=request.user)
+    booking_count = bookings.count()
+
+    # Render the template with the form and booking information
+    return render(request, 'request/booking_history.html', {'bookings': bookings, 'booking_count': booking_count})
+
