@@ -91,3 +91,19 @@ body {
     color: #333;
     line-height: 1.6;
 }
+
+body {
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.dashboard-nav-item, .btn-primary {
+    transition: all 0.3s ease;
+}
+
+body:hover {
+    color: #007bff;
+}
+
+.dashboard-nav-item:hover, .btn-primary:hover {
+    transform: translateY(-2px);
+}
