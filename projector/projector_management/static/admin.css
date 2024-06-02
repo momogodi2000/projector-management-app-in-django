@@ -78,3 +78,7 @@ body {
     background-color: #0069d9;
     border-color: #0062cc;
 }
+
+body:hover{
+    color: #007bff;
+  }
