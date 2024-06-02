@@ -78,3 +78,73 @@ body {
     background-color: #0069d9;
     border-color: #0062cc;
 }
+
+body:hover{
+    color: #007bff;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f2f2f2;
+    color: #333;
+    line-height: 1.6;
+}
+
+body {
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.dashboard-nav-item, .btn-primary {
+    transition: all 0.3s ease;
+}
+
+body:hover {
+    color: #007bff;
+}
+
+.dashboard-nav-item:hover, .btn-primary:hover {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .dashboard-nav {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .dashboard-app {
+        margin-top: 0;
+        padding: 15px;
+    }
+
+    .dashboard-content {
+        padding: 15px;
+    }
+
+    .btn-primary {
+        bottom: 60px;
+    }
+}
+
+/* Custom scrollbar styling */
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
