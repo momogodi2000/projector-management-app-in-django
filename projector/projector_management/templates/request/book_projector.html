@@ -17,7 +17,7 @@
                 <label for="projector-type">Projector (type):</label>
                 <select id="projector-type" name="projector_type" required>
                     {% for projector in projectors %}
-                        <option value="{{ projector.id }}">{{ projector.type }}</option>
+                        <option value="{{ projector.id }}">{{ projector.name }}</option>
                     {% endfor %}
                 </select>
             </div>

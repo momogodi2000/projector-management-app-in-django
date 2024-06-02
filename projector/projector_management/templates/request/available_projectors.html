@@ -15,14 +15,16 @@
             <thead>
                 <tr>
                     <th>Projector Name</th>
-                    <th>Location</th>
+                    <th>Model Typee</th>
+                    <th>Quantity</th>
                 </tr>
             </thead>
             <tbody>
                 {% for projector in projectors %}
                 <tr>
                     <td>{{ projector.name }}</td>
-                    <td>{{ projector.location }}</td>
+                    <td>{{ projector.model_type }}</td>
+                    <td>{{ projector.quantity }}</td>
                 </tr>
                 {% empty %}
                 <tr>
