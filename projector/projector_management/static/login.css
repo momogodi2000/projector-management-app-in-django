@@ -2,6 +2,10 @@
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
 }
 
 body {
@@ -11,7 +15,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: -20px 0 50px;
+    margin: 0;
 }
 
 .container {
@@ -24,51 +28,58 @@ body {
     width: 768px;
     max-width: 100%;
     min-height: 480px;
+    display: flex;
+    flex-direction: row;
 }
 
-.form-container form {
-    background: #ffffff;
+.form-container {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 0 50px;
-    height: 100%;
     justify-content: center;
     align-items: center;
+    padding: 0 50px;
     text-align: center;
+    background: #ffffff;
 }
 
 form h1 {
     font-weight: bold;
-    margin: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
 }
 
 form input {
     background: #eee;
-    border: none;
+    border-radius: 5px;
     padding: 12px 15px;
     margin: 8px 0;
     width: 100%;
+    font-size: 14px;
 }
 
 form button {
     border: none;
     padding: 12px 45px;
     margin: 20px 0;
-    background-color: #FF4B2B;
+    background-color: #007bff;
     color: #FFFFFF;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     letter-spacing: 1px;
     text-transform: uppercase;
-    transition: transform 80ms ease-in;
+    transition: transform 80ms ease-in, background-color 0.3s;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 form button:active {
     transform: scale(0.95);
 }
 
-form button:focus {
-    outline: none;
+form button:hover {
+    background-color: #ff3a1b;
 }
 
 form a {
@@ -76,6 +87,11 @@ form a {
     font-size: 14px;
     text-decoration: none;
     margin: 15px 0;
+    transition: color 0.3s;
+}
+
+form a:hover {
+    color: #FF4B2B;
 }
 
 .overlay-container {
@@ -89,8 +105,6 @@ form a {
 }
 
 .overlay {
-    background: #FF416C;
-    background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
     background: linear-gradient(to right, #FF4B2B, #FF416C);
     background-repeat: no-repeat;
     background-size: cover;
@@ -148,6 +162,19 @@ form a {
     background-color: transparent;
     border-color: #FFFFFF;
     color: #FFFFFF;
+    padding: 12px 45px;
+    margin: 20px 0;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in, background-color 0.3s;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.ghost:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 #forgotPasswordContainer {
@@ -159,4 +186,10 @@ form a {
     width: 400px;
     max-width: 100%;
     min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
 }
