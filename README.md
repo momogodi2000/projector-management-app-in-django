@@ -2,6 +2,7 @@
  projector management app in django
 
  run the requirement.txt to have the dependency
+ 
  run python manage.py test to see the different test
 
 
