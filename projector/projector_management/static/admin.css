@@ -107,3 +107,26 @@ body:hover {
 .dashboard-nav-item:hover, .btn-primary:hover {
     transform: translateY(-2px);
 }
+
+@media (max-width: 768px) {
+    .dashboard-nav {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .dashboard-app {
+        margin-top: 0;
+        padding: 15px;
+    }
+
+    .dashboard-content {
+        padding: 15px;
+    }
+
+    .btn-primary {
+        bottom: 60px;
+    }
+}
