@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Projectors</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'available_projectors.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Available Projectors</h1>
+
+        <table class="projector-table">
+            <thead>
+                <tr>
+                    <th>Projector Name</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for projector in projectors %}
+                <tr>
+                    <td>{{ projector.name }}</td>
+                    <td>{{ projector.location }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2" class="no-projectors">No available projectors found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{% url 'user_dashboard' %}" class="back-button">Back to Dashboard</a>
+    </div>
+</body>
+</html>

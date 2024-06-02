@@ -216,10 +216,14 @@ def admin_dashboard(request):
 
 @login_required
 def booking_history(request):
-    # Fetch booking data from the database for the current user
     bookings = Booking.objects.filter(user=request.user)
     booking_count = bookings.count()
-
-    # Render the template with the form and booking information
     return render(request, 'request/booking_history.html', {'bookings': bookings, 'booking_count': booking_count})
+
+
+@login_required
+def available_projectors(request):
+    booked_projectors = Booking.objects.values_list('projector_id', flat=True)
+    projectors = Projector.objects.exclude(id__in=booked_projectors)
+    return render(request, 'request/available_projectors.html', {'projectors': projectors})
 

@@ -109,7 +109,7 @@
             <nav class="dashboard-nav-list"> 
                 <a href="{% url 'book_projector' %}" class="dashboard-nav-item"><i class="fas fa-tachometer-alt"></i> Book a Projector</a>
                 <a href="{% url 'booking_history' %}" class="dashboard-nav-item active"><i class="fas fa-home"></i> Booking History</a>
-                <a href="#" class="dashboard-nav-item"><i class="fas fa-tachometer-alt"></i> Consult Projector</a>
+                <a href="{% url 'available_projectors' %}" class="dashboard-nav-item"><i class="fas fa-tachometer-alt"></i> Check Available Projector</a>
                 <a href="{% url 'about_aics' %}" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> About AICS</a>
             </nav>
             <div class="dashboard-nav-dropdown"></div>
