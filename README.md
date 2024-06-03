@@ -6,6 +6,12 @@
  run python manage.py test to see the different test
 
 
+admin credencail : user name: prince
+
+                   pasword : password
+
+user credential: just register and login 
+
 # work progression
 
  -MOMO godi yvan is the group header and work on the authentification/session and admin dashbaord aith test endpoint.
